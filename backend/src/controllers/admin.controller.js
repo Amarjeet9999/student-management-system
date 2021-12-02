@@ -78,19 +78,19 @@ const login = async (req, res) => {
 const stLogin = async (req, res) => {
   try {
     // first check if a user with that email already exist
-    let student = await Student.findOne({
+    let user = await Student.findOne({
       email: req.body.email,
     }).exec();
 
     // if not student than throw an error
-    if (!student) {
+    if (!user) {
       return res
         .status(400)
         .json({ status: "error", message: "User does not exist" });
     }
 
     // if user than match the user
-    const match = student.checkPassword(req.body.password);
+    const match = user.checkPassword(req.body.password);
     // if not matches than throw the error
 
     if (!match) {
@@ -101,9 +101,9 @@ const stLogin = async (req, res) => {
     }
 
     // if match than create the token
-    const token = newToken(student);
+    const token = newToken(user);
 
-    return res.status(201).json({ student, token });
+    return res.status(201).json({ user, token });
   } catch (err) {
     return res.status(500).json({ err });
   }

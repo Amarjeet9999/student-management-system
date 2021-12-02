@@ -2,9 +2,12 @@ const express = require("express");
 const app = express();
 const connect = require("./config/db");
 app.use(express.json());
+const cors = require("cors");
 
 const { register, login, stLogin } = require("./controllers/admin.controller");
 const studentController = require("./controllers/student.controller");
+
+app.use(cors());
 
 app.use("/login", login);
 app.use("/stlogin", stLogin);

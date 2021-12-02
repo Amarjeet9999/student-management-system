@@ -24,7 +24,7 @@ export const HomePage = () => {
 };
 
 const Main = styled.div`
-  background-color: #242425;
+  background-color: rgb(46, 48, 53);
   height: 100vh;
   width: 100%;
   display: flex;
@@ -45,7 +45,7 @@ const Card = styled.div`
   width: 300px;
   border: none;
   cursor: pointer;
-  background-color: #2e2d2d;
+  background-color: rgb(71, 74, 81);
   border-radius: 5px;
   display: flex;
   flex-direction: column;

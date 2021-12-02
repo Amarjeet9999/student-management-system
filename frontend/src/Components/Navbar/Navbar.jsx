@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 
-export const Navbar = () => {
+export const Navbar = ({ setShow }) => {
   return (
     <Main>
       <Left>
@@ -10,7 +10,11 @@ export const Navbar = () => {
       </Left>
       <Right>
         <div className="btn">
-          <Button variant="contained" color="success">
+          <Button
+            onClick={() => setShow((e) => !e)}
+            variant="contained"
+            color="success"
+          >
             Login
           </Button>
           <Button variant="contained" color="success">
@@ -24,12 +28,17 @@ export const Navbar = () => {
 
 const Main = styled.div`
   height: 60px;
-  background-color: #2e2d2d;
+  background-color: rgb(23, 21, 68);
   display: flex;
   justify-content: space-between;
+  font-family: Arial, Helvetica, sans-serif;
   color: #fef5ed;
   font-size: 25px;
   line-height: 60px;
+  position: fixed;
+  width: 100%;
+  box-shadow: 0px 0px 10px 2px #bbbaba;
+  top: 0;
 `;
 
 const Left = styled.div`
