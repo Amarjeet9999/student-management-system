@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 
-export const Navbar = ({ setShow }) => {
+export const Navbar = ({ setShow, setShowReg }) => {
   return (
     <Main>
       <Left>
@@ -17,7 +17,11 @@ export const Navbar = ({ setShow }) => {
           >
             Login
           </Button>
-          <Button variant="contained" color="success">
+          <Button
+            onClick={() => setShowReg((e) => !e)}
+            variant="contained"
+            color="success"
+          >
             SignUp
           </Button>
         </div>

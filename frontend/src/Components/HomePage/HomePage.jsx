@@ -40,7 +40,7 @@ const CardDiv = styled.div`
   align-items: center;
 `;
 
-const Card = styled.div`
+export const Card = styled.div`
   height: 300px;
   width: 300px;
   border: none;
