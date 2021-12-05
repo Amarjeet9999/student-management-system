@@ -1,8 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 export const HomePage = () => {
+  const { auth } = useSelector((state) => state.auth);
+  if (auth) {
+    return <Redirect to="/app" />;
+  }
   return (
     <Main>
       <CardDiv>

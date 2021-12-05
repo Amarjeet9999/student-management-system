@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { Card, Inner } from "../SignUp/Form";
+import { Redirect } from "react-router-dom";
 import {
   Radio,
   RadioGroup,
@@ -15,7 +17,7 @@ export const Form = ({ setShow }) => {
 
   const handleLogin = async () => {
     try {
-      if (client === "") return;
+      if (client === "" || email === "" || password === "") return;
       let url =
         client === "admin"
           ? "http://localhost:5000/login"
@@ -26,8 +28,7 @@ export const Form = ({ setShow }) => {
           password: password,
         })
         .then((res) => {
-          console.log(res.data);
-          localStorage.setItem("user", JSON.stringify(res.data));
+          localStorage.setItem("user-st-m", JSON.stringify(res.data));
         });
     } catch (err) {
       console.log(err);
@@ -40,7 +41,11 @@ export const Form = ({ setShow }) => {
   return (
     <MainForm onSubmit={(e) => e.preventDefault()}>
       <div className="firstForm">
-        <h1>Login</h1>
+        <h1>
+          {(client === "admin" && "Admin ") ||
+            (client === "student" && "Student ")}
+          Login
+        </h1>
         <span
           onClick={() => setShow((e) => !e)}
           className="material-icons icons"
@@ -48,47 +53,59 @@ export const Form = ({ setShow }) => {
           close
         </span>
       </div>
-      <div className="input-field">
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          type="text"
-          placeholder="Email"
-        />
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          type="text"
-          placeholder="Password"
-        />
-        <FormControl component="fieldset">
-          <RadioGroup
-            row
-            aria-label="type"
-            name="client_type"
-            value={client}
-            onChange={(e) => {
-              setClient(e.target.value);
-            }}
-          >
-            <FormControlLabel
-              value="student"
-              control={<Radio />}
-              label="Student"
-              labelPlacement="start"
-            />
-            <FormControlLabel
-              value="admin"
-              control={<Radio />}
-              label="Admin"
-              labelPlacement="start"
-            />
-          </RadioGroup>
-        </FormControl>
-        <button onClick={handleLogin} className="btn-email">
-          Continue
-        </button>
-      </div>
+      <Inner>
+        {client === "admin" && (
+          <Card>
+            <img src="https://freesvg.org/img/administrator.png" alt="" />
+          </Card>
+        )}
+        {client === "student" && (
+          <Card>
+            <img src="https://freesvg.org/img/happy.png" alt="" />
+          </Card>
+        )}
+        <div className="input-field">
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            type="text"
+            placeholder="Email"
+          />
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            type="text"
+            placeholder="Password"
+          />
+          <FormControl component="fieldset">
+            <RadioGroup
+              row
+              aria-label="type"
+              name="client_type"
+              value={client}
+              onChange={(e) => {
+                setClient(e.target.value);
+              }}
+            >
+              <FormControlLabel
+                value="admin"
+                control={<Radio />}
+                label="Admin"
+                labelPlacement="start"
+              />
+              <FormControlLabel
+                value="student"
+                control={<Radio />}
+                label="Student"
+                labelPlacement="start"
+              />
+            </RadioGroup>
+          </FormControl>
+          <button onClick={handleLogin} className="btn-email">
+            Continue
+          </button>
+        </div>
+      </Inner>
     </MainForm>
   );
 };

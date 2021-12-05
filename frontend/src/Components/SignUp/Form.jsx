@@ -27,7 +27,7 @@ export const Form = ({ setShowReg }) => {
         })
         .then((res) => {
           console.log(res.data);
-          localStorage.setItem("user", JSON.stringify(res.data));
+          localStorage.setItem("user-st-m", JSON.stringify(res.data));
         });
     } catch (err) {
       console.log(err);
@@ -106,10 +106,7 @@ export const Form = ({ setShowReg }) => {
           {!showErr && (
             <p style={{ color: "red" }}>Student Can't Signup Directly</p>
           )}
-          <button
-            onClick={handleRegister}
-            className="btn-email"
-          >
+          <button onClick={handleRegister} className="btn-email">
             Continue
           </button>
         </div>
@@ -243,7 +240,7 @@ export const Card = styled.div`
   }
 `;
 
-const Inner = styled.div`
+export const Inner = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;

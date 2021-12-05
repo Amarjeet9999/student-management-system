@@ -7,4 +7,7 @@ export const AdminDB = () => {
 
 export const Main = styled.div`
   margin-top: 60px;
+  border: 2px solid green;
+  background-color: #d4a0ba;
+  min-height: 100vh;
 `;
