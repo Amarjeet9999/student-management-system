@@ -6,7 +6,7 @@ import axios from "axios";
 export const AdminDB = () => {
   const [contest, setContest] = React.useState();
   const [addForm, setAddForm] = React.useState();
-  const [showSt, setShowSt] = React.useState(false);
+  const [showSt, setShowSt] = React.useState(true);
   const [stData, setStData] = React.useState([]);
   const [studentData, setStudentData] = React.useState({});
   const [contestData, setContestData] = React.useState({});
@@ -230,7 +230,7 @@ export const AdminDB = () => {
       ) : (
         <Students>
           <h1 style={{ width: "max-content", margin: "auto" }}>All Students</h1>
-          <div class="main">
+          <div classname="main">
             <table className="table">
               <tr>
                 <th>Name</th>
@@ -243,7 +243,7 @@ export const AdminDB = () => {
                 return (
                   <tr>
                     <td>{el.name}</td>
-                    <td class="email">{el.email}</td>
+                    <td className="email">{el.email}</td>
                     <td>{el.city}</td>
                     <td>{el.gender}</td>
                     <td onClick={() => deleteStudent(el._id)}>
@@ -262,12 +262,11 @@ export const AdminDB = () => {
 };
 
 export const Main = styled.div`
-  margin-top: 60px;
+  padding-top: 60px;
   margin-bottom: 40px;
   background-color: #d4a0ba;
   height: max-content;
   min-height: 100vh;
-  border: 2px solid green;
   & .inner {
     display: flex;
     justify-content: space-around;

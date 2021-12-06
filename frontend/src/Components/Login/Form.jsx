@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { Card, Inner } from "../SignUp/Form";
-import { Redirect } from "react-router-dom";
 import {
   Radio,
   RadioGroup,

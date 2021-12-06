@@ -40,7 +40,7 @@ export const NavbarAuth = () => {
   const handleLogout = () => {
     try {
       dispatch(logout());
-      localStorage.removeItem("user");
+      localStorage.removeItem("user-st-m");
       history.push("/");
     } catch (err) {
       console.log(err);
