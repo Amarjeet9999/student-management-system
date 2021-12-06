@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { HomePage } from "../Components/HomePage/HomePage";
-import { Navbar } from "../Components/Navbar/Navbar";
+import { Navbar, NavbarAuth } from "../Components/Navbar/Navbar";
 import { Footer } from "../Components/Footer/Footer";
 import { Login } from "../Components/Login/Login";
 import { StudentDB } from "../Components/StudentDashboard/StudentDB";
@@ -15,7 +15,7 @@ export const Routes = () => {
   const [show, setShow] = React.useState(false);
   const [showReg, setShowReg] = React.useState(false);
   const dispatch = useDispatch();
-  const { role } = useSelector((state) => state.auth);
+  const { role, auth } = useSelector((state) => state.auth);
 
   React.useEffect(() => {
     dispatch(loginLoading());
@@ -28,7 +28,11 @@ export const Routes = () => {
 
   return (
     <>
-      <Navbar setShow={setShow} setShowReg={setShowReg} />
+      {!auth ? (
+        <Navbar setShow={setShow} setShowReg={setShowReg} />
+      ) : (
+        <NavbarAuth />
+      )}
       {show && <Login setShow={setShow} />}
       {showReg && <SignUp setShowReg={setShowReg} />}
       <Switch>

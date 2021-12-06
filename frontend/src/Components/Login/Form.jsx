@@ -28,6 +28,7 @@ export const Form = ({ setShow }) => {
           password: password,
         })
         .then((res) => {
+          window.location.reload();
           localStorage.setItem("user-st-m", JSON.stringify(res.data));
         });
     } catch (err) {

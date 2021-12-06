@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
+import { logout } from "../../Redux/Auth/Actions";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 export const Navbar = ({ setShow, setShowReg }) => {
   return (
@@ -30,7 +33,38 @@ export const Navbar = ({ setShow, setShowReg }) => {
   );
 };
 
+export const NavbarAuth = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    try {
+      dispatch(logout());
+      localStorage.removeItem("user");
+      history.push("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  return (
+    <Main>
+      <Left>
+        <div>Student Management System</div>
+      </Left>
+      <Right>
+        <div className="btn">
+          {" "}
+          <Button onClick={handleLogout} variant="contained" color="success">
+            Logout
+          </Button>
+        </div>
+      </Right>
+    </Main>
+  );
+};
+
 const Main = styled.div`
+  z-index: 9999;
   height: 60px;
   background-color: rgb(23, 21, 68);
   display: flex;

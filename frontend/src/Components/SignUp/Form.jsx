@@ -64,7 +64,7 @@ export const Form = ({ setShowReg }) => {
             onChange={(e) => setName(e.target.value)}
             value={name}
             type="text"
-            placeholder="Email"
+            placeholder="Name"
           />
           <input
             onChange={(e) => setEmail(e.target.value)}
