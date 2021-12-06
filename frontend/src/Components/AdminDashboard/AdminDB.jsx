@@ -9,11 +9,18 @@ export const AdminDB = () => {
   const [showSt, setShowSt] = React.useState(false);
   const [stData, setStData] = React.useState([]);
   const [studentData, setStudentData] = React.useState({});
+  const [contestData, setContestData] = React.useState({});
 
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
     setStudentData({ ...studentData, [name]: value });
+  };
+
+  const handleChangeContest = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setContestData({ ...contestData, [name]: value });
   };
 
   const fetchData = async () => {
@@ -36,7 +43,7 @@ export const AdminDB = () => {
       await axios
         .post("http://localhost:5000/student", {
           name: studentData.name,
-          email: studentData.name,
+          email: studentData.email,
           password: "12345",
           city: studentData.city,
           age: studentData.age,
@@ -46,6 +53,33 @@ export const AdminDB = () => {
           roles: "student",
         })
         .then((res) => fetchData());
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const deleteStudent = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/student/${id}`).then((res) => {
+        fetchData();
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const addContest = async (e) => {
+    e.preventDefault();
+    try {
+      await axios
+        .post("http://localhost:5000/contest", {
+          title: contestData.title,
+          type: contestData.type,
+          time: contestData.time,
+          deadline: contestData.deadline,
+          tags: [contestData.tags],
+        })
+        .then((res) => console.log(res.data));
     } catch (err) {
       console.log(err);
     }
@@ -101,20 +135,44 @@ export const AdminDB = () => {
       {!showSt ? (
         <div className="form">
           {contest && (
-            <form action="">
+            <form action="" onSubmit={addContest}>
               <h1>Add Contest</h1>
               <div className="input-field">
-                <select name="type">
+                <select onChange={handleChangeContest} name="type">
                   <option defaultValue value="dsa">
                     DSA
                   </option>
                   <option value="coding">Coding</option>
                 </select>
-                <input type="text" placeholder="Title" />
-                <input type="text" placeholder="Time" />
-                <input type="text" placeholder="Deadline" />
-                <input type="text" placeholder="tags" />
-                <input type="submit" value="Continue" />
+                <input
+                  onChange={handleChangeContest}
+                  type="text"
+                  name="title"
+                  placeholder="Title"
+                />
+                <input
+                  name="time"
+                  onChange={handleChangeContest}
+                  type="text"
+                  placeholder="Time"
+                />
+                <input
+                  name="deadline"
+                  onChange={handleChangeContest}
+                  type="text"
+                  placeholder="Deadline"
+                />
+                <input
+                  name="tags"
+                  onChange={handleChangeContest}
+                  type="text"
+                  placeholder="tags"
+                />
+                <input
+                  onChange={handleChangeContest}
+                  type="submit"
+                  value="Continue"
+                />
               </div>
             </form>
           )}
@@ -179,6 +237,7 @@ export const AdminDB = () => {
                 <th>Email</th>
                 <th>City</th>
                 <th>Gender</th>
+                <th>Remove</th>
               </tr>
               {stData?.map((el) => {
                 return (
@@ -187,6 +246,10 @@ export const AdminDB = () => {
                     <td class="email">{el.email}</td>
                     <td>{el.city}</td>
                     <td>{el.gender}</td>
+                    <td onClick={() => deleteStudent(el._id)}>
+                      {" "}
+                      <span className="material-icons icons">delete</span>
+                    </td>
                   </tr>
                 );
               })}
@@ -301,5 +364,8 @@ const Students = styled.div`
     & .email {
       text-transform: none;
     }
+  }
+  & .icons {
+    margin-left: 25px;
   }
 `;

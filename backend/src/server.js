@@ -6,6 +6,7 @@ const cors = require("cors");
 
 const { register, login, stLogin } = require("./controllers/admin.controller");
 const studentController = require("./controllers/student.controller");
+const contestController = require("./controllers/contest.controller");
 
 app.use(cors());
 
@@ -13,6 +14,7 @@ app.use("/login", login);
 app.use("/stlogin", stLogin);
 app.use("/register", register);
 app.use("/student", studentController);
+app.use("/contest", contestController);
 
 module.exports = async () => {
   try {

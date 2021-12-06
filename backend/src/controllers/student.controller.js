@@ -29,4 +29,13 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  try {
+    let user = await Student.findByIdAndDelete(req.params.id);
+    return res.status(201).json({ data: user });
+  } catch (err) {
+    return res.status(400).json({ message: err });
+  }
+});
+
 module.exports = router;
